@@ -23,7 +23,7 @@ body{
 background:#080810;
 color:#b04cff;
 min-height:100vh;
-overflow:hidden;
+overflow-x:hidden;
 
 margin-left:220px;
 }
@@ -170,6 +170,15 @@ position:relative;
 left:-110px;
 }
 
+@media (max-width:768px){
+
+.dev-box{
+left:0;
+margin:80px 15px;
+}
+
+}
+
 /* ==========================
    スマホ用メニュー
 ========================== */
@@ -270,7 +279,6 @@ transform:translateY(-80px) scale(0.2);
 <nav id="sidebar">
 
 <a href="index.html" class="active">TOP</a>
-
 <a href="about.html">アビスについて</a>
 <a href="join.html">参加方法</a>
 <a href="cast.html">キャスト一覧</a>
@@ -309,6 +317,8 @@ sidebar.classList.toggle("open");
    マウス魔力エフェクト
 ===================== */
 
+if(window.innerWidth > 768){
+
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 
@@ -338,6 +348,8 @@ setInterval(()=>{
     },1800);
 
 },60);
+
+}
 
 </script>
 

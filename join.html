@@ -7,65 +7,43 @@
 <title>異世界アビス - 参加方法</title>
 
 <style>
-#sidebar{
-
+#menuBtn{
+display:none;
 position:fixed;
+top:15px;
+left:15px;
+z-index:2000;
 
-left:0;
-top:0;
+width:50px;
+height:50px;
 
-width:220px;
-height:100vh;
+border:none;
+border-radius:10px;
 
-background:rgba(0,0,0,.85);
+background:rgba(0,0,0,.8);
+color:#b04cff;
 
-border-right:1px solid #b04cff;
+font-size:28px;
+cursor:pointer;
 
-padding-top:40px;
+box-shadow:0 0 10px rgba(176,76,255,.5);
+}
 
-z-index:1000;
-
-backdrop-filter:blur(10px);
-
+#sidebar{
+width:180px;
+left:-180px;
+padding-top:80px;
+background:rgba(0,0,0,.96);
+transition:.3s;
+z-index:1500;
 }
 
 #sidebar a{
-
-display:block;
-
-padding:15px 25px;
-
-color:#ddd;
-
-text-decoration:none;
-
-font-size:18px;
-
-transition:.2s;
-
+padding:18px 25px;
 }
 
-#sidebar a:hover{
-
-background:rgba(176,76,255,.15);
-
-color:#fff;
-
-text-shadow:
-0 0 10px #b04cff;
-
-}
-
-#sidebar a.active{
-
-color:#b04cff;
-
-font-weight:bold;
-
-text-shadow:
-0 0 10px #b04cff,
-0 0 20px #b04cff;
-
+#sidebar.open{
+left:0;
 }
 /* ==========================
    ベース
@@ -132,6 +110,12 @@ text-align:center;
 padding:30px;
 font-size:42px;
 letter-spacing:6px;
+}
+
+.title{
+padding-top:80px;
+text-align:center;
+font-size:32px;
 }
 
 /* ==========================
@@ -603,6 +587,20 @@ z-index:1500;
 left:0;
 }
 
+.title{
+font-size:26px;
+letter-spacing:2px;
+}
+/* 追加 */
+
+#content{
+padding:10px;
+}
+
+.event-box{
+padding:18px;
+}
+
 }
 
 </style>
@@ -705,6 +703,8 @@ target="_blank">
 </div>
 
 <script>
+if(window.innerWidth > 768){
+
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 
@@ -734,6 +734,8 @@ setInterval(()=>{
     },1800);
 
 },60);
+
+}
 
 const menuBtn =
 document.getElementById("menuBtn");
