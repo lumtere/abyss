@@ -1737,7 +1737,33 @@ alert("刻印番号が違います");
 function sleep(ms){
 return new Promise(r=>setTimeout(r,ms));
 }
+async function changeText(text){
 
+const el =
+document.getElementById("unlockText");
+
+/* 今の文字を消す */
+while(el.innerText.length > 0){
+
+    el.innerText =
+    el.innerText.slice(0,-1);
+
+    await sleep(40);
+}
+
+/* 少し待つ */
+await sleep(300);
+
+/* 新しい文字を表示 */
+for(let i=0;i<text.length;i++){
+
+    el.innerText += text[i];
+
+    await sleep(70);
+
+}
+
+}
 async function playUnlock(){
 
 const s=document.getElementById("unlockScreen");
@@ -1749,15 +1775,17 @@ setTimeout(()=>{
 s.style.opacity=1;
 },50);
 
-await sleep(1000);
+await sleep(1800);
 
-document.getElementById("unlockText").innerText=
-"深淵が反応しています...";
+await changeText(
+"深淵が反応しています..."
+);
 
-await sleep(1200);
+await sleep(1500);
 
-document.getElementById("unlockText").innerText=
-"新たな記録が解放されました";
+await changeText(
+"新たな記録が解放されました"
+);
 
 await sleep(1500);
 
