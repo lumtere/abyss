@@ -335,7 +335,59 @@ font-size:42px;
 cursor:pointer;
 user-select:none;
 }
+/* ==========================
+   スマホ用メニュー
+========================== */
 
+#menuBtn{
+display:none;
+position:fixed;
+top:15px;
+left:15px;
+z-index:2000;
+
+width:50px;
+height:50px;
+
+border:none;
+border-radius:10px;
+
+background:rgba(0,0,0,.8);
+color:#b04cff;
+
+font-size:28px;
+cursor:pointer;
+
+box-shadow:
+0 0 10px rgba(176,76,255,.5);
+}
+
+/* スマホ */
+
+@media (max-width:768px){
+
+body{
+margin-left:0;
+}
+
+#menuBtn{
+display:block;
+}
+
+#sidebar{
+
+left:-220px;
+
+transition:.3s;
+
+z-index:1500;
+}
+
+#sidebar.open{
+left:0;
+}
+
+}
 /* ==========================
    入力欄
 ========================== */
@@ -1633,6 +1685,18 @@ setInterval(()=>{
     },1800);
 
 },60);
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const sidebar =
+document.getElementById("sidebar");
+
+menuBtn.addEventListener("click",()=>{
+
+sidebar.classList.toggle("open");
+
+});
 
 </script>
 
