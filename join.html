@@ -30,20 +30,49 @@ box-shadow:0 0 10px rgba(176,76,255,.5);
 }
 
 #sidebar{
-width:180px;
-left:-180px;
-padding-top:80px;
-background:rgba(0,0,0,.96);
-transition:.3s;
-z-index:1500;
+position:fixed;
+left:0;
+top:0;
+
+width:220px;
+height:100vh;
+
+background:rgba(0,0,0,.85);
+border-right:1px solid #b04cff;
+
+padding-top:40px;
+
+z-index:1000;
+backdrop-filter:blur(10px);
 }
 
 #sidebar a{
-padding:18px 25px;
+display:block;
+
+width:100%;
+
+padding:15px 25px;
+
+color:#ddd;
+text-decoration:none;
+
+font-size:18px;
+
+transition:.2s;
 }
 
-#sidebar.open{
-left:0;
+#sidebar a:hover{
+background:rgba(176,76,255,.15);
+color:#fff;
+text-shadow:0 0 10px #b04cff;
+}
+
+#sidebar a.active{
+color:#b04cff;
+font-weight:bold;
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
 }
 /* ==========================
    ベース
@@ -575,12 +604,22 @@ display:block;
 }
 
 #sidebar{
+position:fixed;
+left:0;
+top:0;
 
-left:-220px;
+width:220px;
+height:100vh;
 
-transition:.3s;
+background:rgba(0,0,0,.85);
+border-right:1px solid #b04cff;
 
-z-index:1500;
+padding-top:40px;
+
+z-index:1000;
+backdrop-filter:blur(10px);
+
+display:block;
 }
 
 #sidebar.open{
