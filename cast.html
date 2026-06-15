@@ -1184,7 +1184,7 @@ name:"イヴリン",
 race:"ドライアド",
 type:"majin",
 img:"images/evelyn/portrait.png",
-code:"4002",
+code:"82",
 desc:`年齢700~800のドライアド。人間に対してかなり興味を持っている。
 アビスで提供される食材の中にはこのドライアドが管理する森からとっているものがあるという話も…？
 
@@ -1204,7 +1204,7 @@ name:"ミリア",
 race:"リッチ",
 type:"majin",
 img:"images/miria/portrait.png",
-code:"82",
+code:"301",
 desc:`永遠の時間を持て余して退屈しているリッチ。
 長い間、生きてきたので生前のことを覚えていない。
 幾つもの出会いと別れを体験し、色んなことを見てきた彼女は他種族に対して基本的に醜くも美しい生物だと感じている。
@@ -1218,8 +1218,8 @@ gallery:[
 "images/miria/gallery2.png",
 "images/miria/gallery3.png",
 "images/miria/gallery4.png",
-"images/inusia/gallery5.png",
-"images/inusia/gallery6.png"
+"images/miria/gallery5.png",
+"images/miria/gallery6.png"
 ]
 },
 
@@ -1593,7 +1593,9 @@ function openC(i){
 current=data[i];
 
 current.unlocked =
-unlockedCasts.includes(current.name);
+JSON.parse(
+localStorage.getItem("unlockedCasts") || "[]"
+).includes(current.name);
 
 document.getElementById("modal").style.display="flex";
 
