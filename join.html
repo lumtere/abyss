@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>異世界アビス - キャスト図鑑</title>
+
+<style>
+#sidebar{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:220px;
+height:100vh;
+
+background:rgba(0,0,0,.85);
+
+border-right:1px solid #b04cff;
+
+padding-top:40px;
+
+z-index:1000;
+
+backdrop-filter:blur(10px);
+
+}
+
+#sidebar a{
+
+display:block;
+
+padding:15px 25px;
+
+color:#ddd;
+
+text-decoration:none;
+
+font-size:18px;
+
+transition:.2s;
+
+}
+
+#sidebar a:hover{
+
+background:rgba(176,76,255,.15);
+
+color:#fff;
+
+text-shadow:
+0 0 10px #b04cff;
+
+}
+
+#sidebar a.active{
+
+color:#b04cff;
+
+font-weight:bold;
+
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+
+}
+/* ==========================
+   ベース
+========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Yu Gothic",sans-serif;
+}
+
+body{
+background:#080810;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+
+margin-left:220px;
+}
+
+/* ==========================
+   魔法陣
+========================== */
+
+body::before{
+content:"";
+position:fixed;
+width:900px;
+height:900px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:url("images/magic-circle.png") center/contain no-repeat;
+opacity:0.08;
+pointer-events:none;
+
+/* ここ変更 */
+z-index:0;
+
+animation:rotateCircle 120s linear infinite;
+}
+
+#content{
+position:relative;
+z-index:1;
+}
+
+@keyframes rotateCircle{
+from{
+transform:translate(-50%,-50%) rotate(0deg);
+}
+to{
+transform:translate(-50%,-50%) rotate(360deg);
+}
+}
+
+/* ==========================
+   タイトル
+========================== */
+
+.title{
+text-align:center;
+padding:30px;
+font-size:42px;
+letter-spacing:6px;
+}
+
+/* ==========================
+   種族タイトル
+========================== */
+
+.section-title{
+margin:30px 20px 10px;
+padding-left:12px;
+border-left:6px solid;
+font-size:24px;
+}
+
+.succubus{
+border-color:#ff4fd8;
+}
+
+.demon{
+border-color:#ff4040;
+}
+
+.angel{
+border-color:#6fdcff;
+}
+
+.majin{
+border-color:#4cff84;
+}
+
+.beast{
+border-color:#ff9d2e;
+}
+
+.youko{
+border-color:#b04cff;
+}
+
+/* ==========================
+   グリッド
+========================== */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:18px;
+padding:10px 20px;
+}
+
+/* ==========================
+   カード
+========================== */
+
+.card{
+background:#111;
+border-radius:12px;
+overflow:hidden;
+cursor:pointer;
+transition:0.25s;
+border:2px solid #333;
+}
+
+.card.completed{
+border:4px solid gold !important;
+
+box-shadow:
+0 0 20px gold,
+0 0 40px gold,
+0 0 60px gold;
+}
+
+.card.completed .card-name{
+color:gold;
+}
+.card:hover{
+transform:translateY(-4px) scale(1.03);
+}
+
+.card img{
+width:100%;
+height:240px;
+object-fit:cover;
+}
+
+.card-info{
+padding:10px;
+}
+
+.card-name{
+font-size:18px;
+font-weight:bold;
+}
+
+.card-race{
+opacity:.7;
+margin-top:4px;
+}
+
+/* 種族色 */
+
+.card.succubus{
+border-color:#ff4fd8;
+}
+
+.card.demon{
+border-color:#ff4040;
+}
+
+.card.angel{
+border-color:#6fdcff;
+}
+
+.card.majin{
+border-color:#4cff84;
+}
+
+.card.beast{
+border-color:#ff9d2e;
+}
+
+.card.youko{
+border-color:#b04cff;
+}
+
+/* ==========================
+   モーダル
+========================== */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.modal-content{
+width:1200px;
+height:700px;
+background:rgba(15,15,25,.95);
+display:flex;
+overflow:hidden;
+border-radius:18px;
+position:relative;
+}
+
+/* 左 */
+
+.modal-left{
+width:45%;
+background:black;
+}
+
+.modal-left img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* 右 */
+
+.modal-right{
+padding:35px;
+flex:1;
+overflow-y:auto;
+}
+
+.modal-name{
+font-size:48px;
+margin-bottom:8px;
+}
+
+.modal-race{
+font-size:22px;
+opacity:.8;
+margin-bottom:20px;
+}
+
+/* 閉じる */
+
+.close{
+position:absolute;
+right:25px;
+top:15px;
+font-size:42px;
+cursor:pointer;
+user-select:none;
+}
+
+/* ==========================
+   入力欄
+========================== */
+
+.seal-box{
+margin-top:20px;
+padding:20px;
+background:rgba(0,0,0,.4);
+border:1px solid #b04cff;
+border-radius:12px;
+box-shadow:
+0 0 10px rgba(176,76,255,.3),
+inset 0 0 10px rgba(176,76,255,.15);
+}
+
+.seal-title{
+font-size:18px;
+letter-spacing:3px;
+color:#d5b2ff;
+margin-bottom:15px;
+}
+
+.seal-message{
+color:#aaa;
+font-style:italic;
+margin-bottom:15px;
+}
+
+.code-input{
+width:300px;
+padding:12px;
+background:#111;
+border:1px solid #b04cff;
+border-radius:8px;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+.code-input:focus{
+box-shadow:0 0 15px rgba(176,76,255,.6);
+}
+
+.unlock-btn{
+padding:12px 20px;
+margin-left:10px;
+background:linear-gradient(
+45deg,
+#6b2fb8,
+#b04cff
+);
+border:none;
+border-radius:8px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+}
+
+.unlock-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 0 15px rgba(176,76,255,.6);
+}
+
+.unlock-btn{
+padding:10px 18px;
+border:none;
+background:#b04cff;
+color:white;
+cursor:pointer;
+border-radius:8px;
+margin-left:8px;
+}
+
+/* ==========================
+   ギャラリー
+========================== */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.gallery img{
+width:100%;
+height:130px;
+object-fit:cover;
+cursor:pointer;
+border-radius:8px;
+transition:.2s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+/* ==========================
+   画像拡大
+========================== */
+
+#viewer{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.95);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+#viewer img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+}
+
+/* ==========================
+   解放演出
+========================== */
+
+#unlockScreen{
+position:fixed;
+inset:0;
+background:black;
+display:none;
+justify-content:center;
+align-items:center;
+opacity:0;
+transition:.5s;
+z-index:999999;
+}
+
+#unlockText{
+font-size:40px;
+color:#b04cff;
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+}
+
+.particle{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+pointer-events:none;
+z-index:9999;
+
+background:radial-gradient(
+circle,
+rgba(255,255,255,0.9) 0%,
+rgba(176,76,255,0.8) 40%,
+rgba(111,220,255,0.3) 100%
+);
+
+filter:blur(1px);
+
+animation:magicFloat 1.8s ease-out forwards;
+}
+
+@keyframes magicFloat{
+
+0%{
+opacity:1;
+transform:
+translate(-50%,-50%)
+scale(1);
+}
+
+100%{
+opacity:0;
+transform:
+translate(-50%,-80px)
+scale(0.2);
+}
+
+}
+#content{
+max-width:900px;
+margin:0 auto;
+padding:20px;
+}
+
+.event-box{
+
+background:rgba(0,0,0,.45);
+
+border:1px solid rgba(176,76,255,.4);
+
+border-radius:15px;
+
+padding:25px;
+
+margin-bottom:25px;
+
+backdrop-filter:blur(5px);
+
+box-shadow:
+0 0 15px rgba(176,76,255,.15);
+
+}
+
+.event-box h2{
+
+color:#b04cff;
+
+margin-bottom:15px;
+
+text-shadow:
+0 0 10px #b04cff;
+
+}
+
+.event-box p,
+.event-box li{
+
+line-height:1.8;
+
+}
+
+.event-box ul,
+.event-box ol{
+
+padding-left:25px;
+
+}
+</style>
+</head>
+
+<body>
+
+<nav id="sidebar">
+
+<a href="index.html">TOP</a>
+
+<a href="about.html">アビスについて</a>
+
+<a href="join.html" class="active">参加方法</a>
+
+<a href="cast.html">
+キャスト一覧
+</a>
+
+<a href="contact.html">連絡</a>
+
+</nav>
+
+<div id="content">
+
+<h1 class="title">
+イベント参加方法
+</h1>
+
+<div class="event-box">
+
+<h2>異世界-アビス- とは</h2>
+
+<p>
+異世界-アビス-はVRChat内で開催される
+魔界・異世界コンセプトの交流イベントです。
+</p>
+
+<p>
+悪魔やサキュバス、獣人、天使など、
+深淵の住人達との交流をお楽しみください。
+</p>
+
+</div>
+
+<div class="event-box">
+
+<h2>開催日時</h2>
+
+<p>
+毎週水曜日 21:00 ～ 22:00
+</p>
+
+</div>
+
+<div class="event-box">
+
+<h2>参加条件</h2>
+
+<ul>
+<li>PC Desktop または PCVR</li>
+<li>軽量アバターの利用にご協力ください</li>
+<li>Quest単機では参加できません</li>
+</ul>
+
+</div>
+
+<div class="event-box">
+
+<h2>参加方法</h2>
+
+<ol>
+<li>
+<a href="https://x.com/isekai_abyss"
+target="_blank">
+
+公式X
+
+</a>
+で当日のインスタンスリーダーを確認
+</li>
+<li>リーダーへフレンド申請</li>
+<li>21:00になったらリクエストインバイトを送信</li>
+<li>案内されたインスタンスへ参加</li>
+</ol>
+
+</div>
+
+<div class="event-box">
+
+<h2>注意事項</h2>
+
+<ul>
+<li>リクエストインバイトは『1回』まで　※複数インスタンスへの同時送信は禁止です</li>
+<li>他参加者への迷惑行為はおやめください</li>
+<li>スタッフの案内には必ず従ってください</li>
+</ul>
+
+</div>
+
+<script>
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+document.addEventListener("mousemove",(e)=>{
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+});
+
+setInterval(()=>{
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left =
+        (mouseX + (Math.random()*30-15)) + "px";
+
+    p.style.top =
+        (mouseY + (Math.random()*30-15)) + "px";
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },1800);
+
+},60);
+
+</script>
+
+</body>
+</html>

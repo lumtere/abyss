@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>異世界-アビス-</title>
+
+<style>
+
+/* ==========================
+   ベース
+========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Yu Gothic",sans-serif;
+}
+
+body{
+background:#080810;
+color:#b04cff;
+min-height:100vh;
+overflow:hidden;
+
+margin-left:220px;
+}
+
+/* ==========================
+   魔法陣
+========================== */
+
+body::before{
+content:"";
+position:fixed;
+width:900px;
+height:900px;
+left:50%;
+top:50%;
+
+transform:translate(-50%,-50%);
+
+background:url("images/magic-circle.png")
+center/contain no-repeat;
+
+opacity:.08;
+
+pointer-events:none;
+
+z-index:-1;
+
+animation:rotateCircle 120s linear infinite;
+}
+
+@keyframes rotateCircle{
+
+from{
+transform:translate(-50%,-50%) rotate(0deg);
+}
+
+to{
+transform:translate(-50%,-50%) rotate(360deg);
+}
+
+}
+#sidebar{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:220px;
+height:100vh;
+
+background:rgba(0,0,0,.85);
+
+border-right:1px solid #b04cff;
+
+padding-top:40px;
+
+z-index:1000;
+
+backdrop-filter:blur(10px);
+
+}
+
+#sidebar a{
+
+display:block;
+
+padding:15px 25px;
+
+color:#ddd;
+
+text-decoration:none;
+
+font-size:18px;
+
+transition:.2s;
+
+}
+
+#sidebar a:hover{
+
+background:rgba(176,76,255,.15);
+
+color:#fff;
+
+text-shadow:
+0 0 10px #b04cff;
+
+}
+
+#sidebar a.active{
+
+color:#b04cff;
+
+font-weight:bold;
+
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+
+}
+/* ==========================
+   開発中表示
+========================== */
+
+.dev-box{
+
+margin:80px auto;
+
+max-width:700px;
+
+padding:40px;
+
+background:rgba(0,0,0,.35);
+
+border:1px solid #b04cff;
+
+border-radius:15px;
+
+box-shadow:
+0 0 20px rgba(176,76,255,.3),
+0 0 40px rgba(176,76,255,.2);
+}
+
+.dev-title{
+
+font-size:48px;
+
+margin-bottom:20px;
+
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+}
+
+.dev-text{
+
+font-size:20px;
+line-height:1.8;
+}
+
+/* ==========================
+   パーティクル
+========================== */
+
+.particle{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+pointer-events:none;
+z-index:9999;
+
+background:radial-gradient(
+circle,
+rgba(255,255,255,0.9) 0%,
+rgba(176,76,255,0.8) 40%,
+rgba(111,220,255,0.3) 100%
+);
+
+filter:blur(1px);
+
+animation:magicFloat 1.8s ease-out forwards;
+}
+
+@keyframes magicFloat{
+
+0%{
+opacity:1;
+transform:translateY(0px) scale(1);
+}
+
+100%{
+opacity:0;
+transform:translateY(-80px) scale(0.2);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+<nav id="sidebar">
+
+<a href="index.html">
+TOP
+</a>
+
+<a href="about.html">
+アビスについて
+</a>
+
+<a href="join.html">
+参加方法
+</a>
+
+<a href="cast.html">
+キャスト一覧
+</a>
+
+<a href="contact.html" class="active">
+連絡
+</a>
+
+</nav>
+
+<div class="dev-box">
+
+<h1 class="dev-title">
+現在開発中
+</h1>
+
+<p class="dev-text">
+このページは現在開発中です。<br>
+深淵の記録はまだ整理されていません。<br><br>
+
+完成まで今しばらくお待ちください。
+</p>
+
+</div>
+
+<script>
+/* =====================
+   マウス魔力エフェクト
+===================== */
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+document.addEventListener("mousemove",(e)=>{
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+});
+
+setInterval(()=>{
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left =
+        (mouseX + (Math.random()*30-15)) + "px";
+
+    p.style.top =
+        (mouseY + (Math.random()*30-15)) + "px";
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },1800);
+
+},60);
+
+</script>
+
+</body>
+</html>

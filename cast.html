@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>異世界アビス - キャスト図鑑</title>
+
+<style>
+#sidebar{
+
+position:fixed;
+
+left:0;
+top:0;
+
+width:220px;
+height:100vh;
+
+background:rgba(0,0,0,.85);
+
+border-right:1px solid #b04cff;
+
+padding-top:40px;
+
+z-index:1000;
+
+backdrop-filter:blur(10px);
+
+}
+
+#sidebar a{
+
+display:block;
+
+padding:15px 25px;
+
+color:#ddd;
+
+text-decoration:none;
+
+font-size:18px;
+
+transition:.2s;
+
+}
+
+#sidebar a:hover{
+
+background:rgba(176,76,255,.15);
+
+color:#fff;
+
+text-shadow:
+0 0 10px #b04cff;
+
+}
+
+#sidebar a.active{
+
+color:#b04cff;
+
+font-weight:bold;
+
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+
+}
+/* ==========================
+   ベース
+========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Yu Gothic",sans-serif;
+}
+
+body{
+background:#080810;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+margin-left:220px;
+}
+
+/* ==========================
+   魔法陣
+========================== */
+
+body::before{
+content:"";
+position:fixed;
+width:900px;
+height:900px;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:url("images/magic-circle.png") center/contain no-repeat;
+opacity:0.08;
+pointer-events:none;
+
+/* ここ変更 */
+z-index:0;
+
+animation:rotateCircle 120s linear infinite;
+}
+
+#content{
+position:relative;
+z-index:1;
+}
+
+@keyframes rotateCircle{
+from{
+transform:translate(-50%,-50%) rotate(0deg);
+}
+to{
+transform:translate(-50%,-50%) rotate(360deg);
+}
+}
+
+/* ==========================
+   タイトル
+========================== */
+
+.title{
+text-align:center;
+padding:30px;
+font-size:42px;
+letter-spacing:6px;
+}
+
+#progress{
+text-align:center;
+margin-bottom:25px;
+
+font-size:20px;
+
+color:#b04cff;
+
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+}
+/* ==========================
+   種族タイトル
+========================== */
+
+.section-title{
+margin:30px 20px 10px;
+padding-left:12px;
+border-left:6px solid;
+font-size:24px;
+}
+
+.succubus{
+border-color:#ff4fd8;
+}
+
+.demon{
+border-color:#ff4040;
+}
+
+.angel{
+border-color:#6fdcff;
+}
+
+.majin{
+border-color:#4cff84;
+}
+
+.beast{
+border-color:#ff9d2e;
+}
+
+.youko{
+border-color:#b04cff;
+}
+
+/* ==========================
+   グリッド
+========================== */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:18px;
+padding:10px 20px;
+}
+
+/* ==========================
+   カード
+========================== */
+
+.card{
+background:#111;
+border-radius:12px;
+overflow:hidden;
+cursor:pointer;
+transition:0.25s;
+border:2px solid #333;
+
+position:relative;
+z-index:5;
+}
+
+.card.completed{
+border:4px solid gold !important;
+
+box-shadow:
+0 0 20px gold,
+0 0 40px gold,
+0 0 60px gold;
+}
+
+.card.completed .card-name{
+color:gold;
+}
+.card:hover{
+transform:translateY(-4px) scale(1.03);
+}
+
+.card img{
+width:100%;
+height:240px;
+object-fit:cover;
+}
+
+.card-info{
+padding:10px;
+}
+
+.card-name{
+font-size:18px;
+font-weight:bold;
+}
+
+.card-race{
+opacity:.7;
+margin-top:4px;
+}
+
+/* 種族色 */
+
+.card.succubus{
+border-color:#ff4fd8;
+}
+
+.card.demon{
+border-color:#ff4040;
+}
+
+.card.angel{
+border-color:#6fdcff;
+}
+
+.card.majin{
+border-color:#4cff84;
+}
+
+.card.beast{
+border-color:#ff9d2e;
+}
+
+.card.youko{
+border-color:#b04cff;
+}
+
+/* ==========================
+   モーダル
+========================== */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.modal-content{
+width:1200px;
+height:700px;
+background:rgba(15,15,25,.95);
+display:flex;
+overflow:hidden;
+border-radius:18px;
+position:relative;
+}
+
+/* 左 */
+
+.modal-left{
+width:45%;
+background:black;
+}
+
+.modal-left img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* 右 */
+
+.modal-right{
+padding:35px;
+flex:1;
+overflow-y:auto;
+}
+
+.modal-name{
+font-size:48px;
+margin-bottom:8px;
+}
+
+.modal-race{
+font-size:22px;
+opacity:.8;
+margin-bottom:20px;
+}
+
+/* 閉じる */
+
+.close{
+position:absolute;
+right:25px;
+top:15px;
+font-size:42px;
+cursor:pointer;
+user-select:none;
+}
+
+/* ==========================
+   入力欄
+========================== */
+
+.seal-box{
+margin-top:20px;
+padding:20px;
+background:rgba(0,0,0,.4);
+border:1px solid #b04cff;
+border-radius:12px;
+box-shadow:
+0 0 10px rgba(176,76,255,.3),
+inset 0 0 10px rgba(176,76,255,.15);
+}
+
+.seal-title{
+font-size:18px;
+letter-spacing:3px;
+color:#d5b2ff;
+margin-bottom:15px;
+}
+
+.seal-message{
+color:#aaa;
+font-style:italic;
+margin-bottom:15px;
+}
+
+.code-input{
+width:300px;
+padding:12px;
+background:#111;
+border:1px solid #b04cff;
+border-radius:8px;
+color:white;
+font-size:16px;
+outline:none;
+}
+
+.code-input:focus{
+box-shadow:0 0 15px rgba(176,76,255,.6);
+}
+
+.unlock-btn{
+padding:12px 20px;
+margin-left:10px;
+background:linear-gradient(
+45deg,
+#6b2fb8,
+#b04cff
+);
+border:none;
+border-radius:8px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+}
+
+.unlock-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 0 15px rgba(176,76,255,.6);
+}
+
+.unlock-btn{
+padding:10px 18px;
+border:none;
+background:#b04cff;
+color:white;
+cursor:pointer;
+border-radius:8px;
+margin-left:8px;
+}
+
+/* ==========================
+   ギャラリー
+========================== */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.gallery img{
+width:100%;
+height:130px;
+object-fit:cover;
+cursor:pointer;
+border-radius:8px;
+transition:.2s;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+/* ==========================
+   画像拡大
+========================== */
+
+#viewer{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.95);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
+
+#viewer img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+}
+
+/* ==========================
+   解放演出
+========================== */
+
+#unlockScreen{
+position:fixed;
+inset:0;
+background:black;
+display:none;
+justify-content:center;
+align-items:center;
+opacity:0;
+transition:.5s;
+z-index:999999;
+}
+
+#unlockText{
+font-size:40px;
+color:#b04cff;
+text-shadow:
+0 0 10px #b04cff,
+0 0 20px #b04cff;
+}
+
+.particle{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+pointer-events:none;
+z-index:9999;
+
+background:radial-gradient(
+circle,
+rgba(255,255,255,0.9) 0%,
+rgba(176,76,255,0.8) 40%,
+rgba(111,220,255,0.3) 100%
+);
+
+filter:blur(1px);
+
+animation:magicFloat 1.8s ease-out forwards;
+}
+
+@keyframes magicFloat{
+
+0%{
+opacity:1;
+transform:
+translate(-50%,-50%)
+scale(1);
+}
+
+100%{
+opacity:0;
+transform:
+translate(-50%,-80px)
+scale(0.2);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav id="sidebar">
+
+<a href="index.html">TOP</a>
+
+<a href="about.html">アビスについて</a>
+
+<a href="join.html">参加方法</a>
+
+<a href="cast.html" class="active">キャスト一覧</a>
+
+<a href="contact.html">連絡</a>
+
+</nav>
+
+<h1 class="title">
+キャスト一覧
+</h1>
+
+<div id="progress">
+観測済み 0 / 0
+</div>
+
+<!-- サキュバス -->
+<h2 class="section-title succubus">サキュバス</h2>
+<div id="succubus" class="grid"></div>
+
+<!-- 悪魔 -->
+<h2 class="section-title demon">悪魔</h2>
+<div id="demon" class="grid"></div>
+
+<!-- 天使 -->
+<h2 class="section-title angel">天使</h2>
+<div id="angel" class="grid"></div>
+
+<!-- 魔人 -->
+<h2 class="section-title majin">魔人</h2>
+<div id="majin" class="grid"></div>
+
+<!-- 魔獣 -->
+<h2 class="section-title beast">魔獣</h2>
+<div id="beast" class="grid"></div>
+
+<!-- 妖 -->
+<h2 class="section-title youko">妖</h2>
+<div id="youko" class="grid"></div>
+
+<!-- ==========================
+     モーダル
+========================== -->
+
+<div class="modal" id="modal" onclick="closeModal()">
+
+<div class="close" onclick="closeModal()">
+×
+</div>
+
+<div class="modal-content" onclick="event.stopPropagation()">
+
+<div class="modal-left">
+<img id="m_img">
+</div>
+
+<div class="modal-right">
+
+<h2 class="modal-name" id="m_name"></h2>
+
+<div class="modal-race" id="m_race"></div>
+
+<hr style="margin:20px 0;">
+
+<h3>プロフィール</h3>
+
+<p id="m_desc">
+プロフィール未設定
+</p>
+
+<br>
+
+<div id="sealSection" class="seal-box">
+
+<div class="seal-title">
+刻印認証システム
+</div>
+
+<p class="seal-message">
+深淵の記録は封印されています...
+</p>
+
+<input
+id="codeInput"
+class="code-input"
+placeholder="刻印番号を入力"
+>
+
+<button
+class="unlock-btn"
+onclick="checkCode()"
+>
+解放
+</button>
+
+</div>
+
+<div id="secret" style="display:none;">
+
+<hr style="margin:20px 0;">
+
+<h3>秘匿記録Ⅰ</h3>
+<p id="secret1" style="margin-bottom:30px;"></p>
+
+<h3>秘匿記録Ⅱ</h3>
+<p id="secret2" style="margin-bottom:30px;"></p>
+
+<h3>深淵の記録</h3>
+
+<div class="gallery" id="gallery"></div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- 解放演出 -->
+
+<div id="unlockScreen">
+<div id="unlockText">
+刻印が刻まれました...
+</div>
+</div>
+
+<!-- 画像拡大 -->
+
+<div id="viewer" onclick="this.style.display='none'">
+<img id="viewerImg">
+</div>
+
+
+<script>
+
+const data=[
+
+/* =====================
+   サキュバス
+===================== */
+
+{
+name:"Akuru",
+race:"サキュバス",
+type:"succubus",
+img:"images/akuru/portrait.png",
+code:"51",
+desc:`お喋りとなでなでが好きなサキュバス。
+人がとけてる姿が好き。
+
+「素直な子にはたくさんサービスしてあげる♡」`,
+gallery:[
+"images/akuru/gallery1.png",
+"images/akuru/gallery2.png",
+"images/akuru/gallery3.png",
+"images/akuru/gallery4.png",
+"images/akuru/gallery5.png",
+"images/akuru/gallery6.png"
+]
+},
+
+{
+name:"カルガ・スカーレット",
+race:"サキュバス",
+type:"succubus",
+img:"images/karuga/portrait.png",
+code:"149",
+desc:`羽で空を飛び回るのが好き。
+人の文化を知るために、のんびり働いている。
+
+からかうのが好きなので、
+質問しても上手くはぐらかされることが多い。
+
+「ねえ、人のことをもっと教えてよ。」`,
+gallery:[
+"images/karuga/gallery1.png",
+"images/karuga/gallery2.png",
+"images/karuga/gallery3.png",
+"images/karuga/gallery4.png",
+"images/karuga/gallery5.png",
+"images/karuga/gallery6.png"
+]
+},
+
+{
+name:"ミント",
+race:"サキュバス",
+type:"succubus",
+img:"images/mint/portrait.png",
+code:"310",
+desc:`アイスが大好きな双子サキュバスの姉
+見た目は幼いが、数千年生きている
+異世界アビスには新たな生贄を探すため働いている
+
+「ベリィを狙うニンゲンは許さない!!」`,
+gallery:[
+"images/mint/gallery1.png",
+"images/mint/gallery2.png",
+"images/mint/gallery3.png",
+"images/mint/gallery4.png",
+"images/mint/gallery5.png",
+"images/mint/gallery6.png"
+]
+},
+
+{
+name:"ベリィ",
+race:"サキュバス",
+type:"succubus",
+img:"images/berry/portrait.png",
+code:"150",
+desc:`アイスが大好きな双子サキュバスの妹
+見た目は幼いが、数千年生きている
+異世界アビスには新たな生贄を探すため働いている
+
+「ベリィのミントは誰にも渡さないんだからね」 `,
+gallery:[
+"images/berry/gallery1.png",
+"images/berry/gallery2.png",
+"images/berry/gallery3.png",
+"images/berry/gallery4.png",
+"images/berry/gallery5.png",
+"images/berry/gallery6.png"
+]
+},
+
+/* =====================
+   悪魔
+===================== */
+
+{
+name:"ナスミ",
+race:"青肌悪魔",
+type:"demon",
+img:"images/nasumi/portrait.png",
+code:"7",
+desc:`お喋り好きな青肌悪魔のお姉さん
+適当なことばかり言うので騙されないよう注意が必要⚠️
+
+「なんでも聞いていいよ〜〜〜
+ホントのこと言ってるとは限らないけどね？」`,
+gallery:[
+"images/nasumi/gallery1.png",
+"images/nasumi/gallery2.png",
+"images/nasumi/gallery3.png",
+"images/nasumi/gallery4.png",
+"images/nasumi/gallery5.png",
+"images/nasumi/gallery6.png"
+]
+},
+
+{
+name:"ルナ・ロゼッタ",
+race:"メスガキ悪魔",
+type:"demon",
+img:"images/luna/portrait.png",
+code:"6",
+desc:`甘いもの大好きみんなの妹的悪魔ちゃん！
+ちょっぴり生意気なところも...？😈
+
+「冒険者さんと会えるのを楽しみに待ってるよー！」`,
+gallery:[
+"images/luna/gallery1.png",
+"images/luna/gallery2.png",
+"images/luna/gallery3.png",
+"images/luna/gallery4.png",
+"images/luna/gallery5.png",
+"images/luna/gallery6.png"
+]
+},
+
+{
+name:"ゼロロ",
+race:"山羊の悪魔",
+type:"demon",
+img:"images/zeroro/portrait.png",
+code:"15",
+desc:`真面目だけどどこか抜けている悪魔。自分を崇拝してくれる人間を探している。
+
+「私のこと崇拝してくれませんか？見返り？そんなものは期待しないでくださいね。」`,
+gallery:[
+"images/zeroro/gallery1.png",
+"images/zeroro/gallery2.png",
+"images/zeroro/gallery3.png",
+"images/zeroro/gallery4.png",
+"images/zeroro/gallery5.png",
+"images/zeroro/gallery6.png"
+]
+},
+
+{
+name:"さいん",
+race:"クソガキ悪魔",
+type:"demon",
+img:"images/sain/portrait.png",
+code:"168",
+desc:`人間のいろいろな表情を見たくて来た悪魔。様々な方法で表情を引き出そうとしてくる。
+しかしへたくそ
+基本丁寧（？）な対応をする
+自由奔放なクソガキ
+
+「冒険者さんたちはどんな表情をするのかな？
+いろんなカオみせてねー！」`,
+gallery:[
+"images/sain/gallery1.png",
+"images/sain/gallery2.png",
+"images/sain/gallery3.png",
+"images/sain/gallery4.png",
+"images/sain/gallery5.png",
+"images/sain/gallery6.png"
+]
+},
+
+{
+name:"のん。",
+race:"上級悪魔",
+type:"demon",
+img:"images/non/portrait.png",
+code:"1",
+desc:`人間の可愛い反応を見たくて働いている、白髪赤目の悪魔。
+あまりにも可愛い子は食べてしまうかも...？
+
+「今宵はどんな可愛い子に会えるか楽しみです。お互いに楽しい時間を過ごしましょうね❤」`,
+gallery:[
+"images/non/gallery1.png",
+"images/non/gallery2.png",
+"images/non/gallery3.png",
+"images/non/gallery4.png",
+"images/non/gallery5.png",
+"images/non/gallery6.png"
+]
+},
+
+/* =====================
+   天使
+===================== */
+
+{
+name:"ヒカリ・コロル",
+race:"堕天使",
+type:"angel",
+img:"images/hikari/portrait.png",
+code:"13",
+desc:`ハイテンションなたまにすごく口が悪くなる堕天使
+人間が笑顔がご飯なので笑ってもらうために働いてる
+
+「会いに来るのを楽しみにしてますよ〜！」`,
+gallery:[
+"images/hikari/gallery1.png",
+"images/hikari/gallery2.png",
+"images/hikari/gallery3.png",
+"images/hikari/gallery4.png",
+"images/hikari/gallery5.png",
+"images/hikari/gallery6.png"
+]
+},
+
+{
+name:"Beta",
+race:"天使",
+type:"angel",
+img:"images/beta/portrait.png",
+code:"202",
+desc:`天界では神聖な秩序を重んじるけど、最近は実地体験重視になってきている。
+それにより冒険者達の文化を知るのと、祝福を届けるために人間界に派遣されこのお店で働き始めることに…
+
+「一言コメント」
+「まだまだ見習いですが、祝福は本気ですっ…！」`,
+gallery:[
+"images/beta/gallery1.png",
+"images/beta/gallery2.png",
+"images/beta/gallery3.png",
+"images/beta/gallery4.png",
+"images/beta/gallery5.png",
+"images/beta/gallery6.png"
+]
+},
+
+{
+name:"ちゃの",
+race:"天使",
+type:"angel",
+img:"images/chano/portrait.png",
+code:"16",
+desc:`ちょっと偉い『能力の天使』。過去に神界の秩序を守るお仕事をしていたが、今はただの一般怠け天使である。
+最近人間と関わり始めたため、冒険者の話を聞いたり、からかう事にハマっている。
+
+｢君の事、僕に教えてくれるかい？｣`,
+gallery:[
+"images/chano/gallery1.png",
+"images/chano/gallery2.png",
+"images/chano/gallery3.png",
+"images/chano/gallery4.png",
+"images/chano/gallery5.png",
+"images/chano/gallery6.png"
+]
+},
+
+{
+name:"ドロシー",
+race:"堕天使",
+type:"angel",
+img:"images/dorothy/portrait.png",
+code:"100",
+desc:`人間のことが大好きで、甘やかして甘やかして大切にしていたら何も出来ない人間が増えてしまったため、怒られ堕とされ堕天使となった。
+アビスであれば存分に人間を可愛がれるということで働きに来ている。
+「早く私のもとへ帰ってきてね」`,
+gallery:[
+"images/dorothy/gallery1.png",
+"images/dorothy/gallery2.png",
+"images/dorothy/gallery3.png",
+"images/dorothy/gallery4.png",
+"images/dorothy/gallery5.png",
+"images/dorothy/gallery6.png"
+]
+},
+
+{
+name:"タウィル",
+race:"天使",
+type:"angel",
+img:"images/tawil/portrait.png",
+code:"57",
+desc:`アビスでは珍しい普通の人間……なのだが、たまに羽が生えたりヘイローがついていたりする。
+巷では天界から召喚された天使なのでは？と訝しむ声も。たまに抜けているところがあるので温かく見守ってあげよう。
+
+｢楽しいひと時を過ごせるといいですね｣`,
+gallery:[
+"images/tawil/gallery1.png",
+"images/tawil/gallery2.png",
+"images/tawil/gallery3.png",
+"images/tawil/gallery4.png",
+"images/tawil/gallery5.png",
+"images/tawil/gallery6.png"
+]
+},
+
+{
+name:"まお",
+race:"天使",
+type:"angel",
+img:"images/mao/portrait.png",
+code:"346",
+desc:`気まぐれなねこ。愛でてあげると懐く…かもしれない。
+アビスにいることを秘密にしてほしい理由があるとかないとか。
+
+「ここで会ったこと、内緒にしてくれる？」`,
+gallery:[
+"images/mao/gallery1.png",
+"images/mao/gallery2.png",
+"images/mao/gallery3.png",
+"images/mao/gallery4.png",
+"images/mao/gallery5.png",
+"images/mao/gallery6.png"
+]
+},
+
+{
+name:"ヰヌシア",
+race:"天使",
+type:"angel",
+img:"images/inusia/portrait.png",
+code:"999",
+desc:`あらゆる命の来世を見ており、より良い来世を迎えられるように人を導いている。
+行っていることは非常に天使らしいのだが、自分以外のすべてを見下しており、言動や素行に粗雑な部分が多々見られる。
+
+人間の文化が好き。
+その中でもアニメやゲームを特に気に入っており、そういった話にはよく食いつく。
+好きなことを好きなだけして生きている。非常に怠惰。
+なぜ堕天していないのかは本人も理解していない。そろそろ堕ちると思っている。
+
+「見た目と声が合っていない？人の尺度で物を語るな。地獄に堕とすぞ。」`,
+gallery:[
+"images/inusia/gallery1.png",
+"images/inusia/gallery2.png",
+"images/inusia/gallery3.png",
+"images/inusia/gallery4.png",
+"images/inusia/gallery5.png",
+"images/inusia/gallery6.png"
+]
+},
+
+/* =====================
+   魔人
+===================== */
+
+{
+name:"のえるん",
+race:"ヴァンパイア",
+type:"majin",
+img:"images/noel/portrait.png",
+code:"312",
+desc:`自由奔放なヴァンパイア。永い時を生きてきた。
+人間と触れ合うことは好きだが、その本心を暴くことは果たして...？
+
+「楽しくお喋りをしようじゃないか。
+そうだな....血をくれるなら楽しませてやらんでもないぞ...？」`,
+gallery:[
+"images/noel/gallery1.png",
+"images/noel/gallery2.png",
+"images/noel/gallery3.png",
+"images/noel/gallery4.png",
+"images/noel/gallery5.png",
+"images/noel/gallery6.png"
+]
+},
+
+{
+name:"イヴリン",
+race:"ドライアド",
+type:"majin",
+img:"images/evelyn/portrait.png",
+code:"4002",
+desc:`年齢700~800のドライアド。人間に対してかなり興味を持っている。
+アビスで提供される食材の中にはこのドライアドが管理する森からとっているものがあるという話も…？
+
+「あなたがあまりに可愛かったら、食べちゃうかもですね？」`,
+gallery:[
+"images/evelyn/gallery1.png",
+"images/evelyn/gallery2.png",
+"images/evelyn/gallery3.png",
+"images/evelyn/gallery4.png",
+"images/evelyn/gallery5.png",
+"images/evelyn/gallery6.png"
+]
+},
+
+{
+name:"ミリア",
+race:"リッチ",
+type:"majin",
+img:"images/miria/portrait.png",
+code:"82",
+desc:`永遠の時間を持て余して退屈しているリッチ。
+長い間、生きてきたので生前のことを覚えていない。
+幾つもの出会いと別れを体験し、色んなことを見てきた彼女は他種族に対して基本的に醜くも美しい生物だと感じている。
+対して自分の骸の身体を醜いものとしており、「可愛い」「綺麗」などの褒め言葉を貰うと照れてしまう"ちょろリッチ"。
+退屈しのぎとして、他者との会話や交流を楽しんでいる。
+心の奥で永遠の命という"呪い"を解呪したがっている。
+
+「……永遠なんて、案外暇なだけよ？」`,
+gallery:[
+"images/miria/gallery1.png",
+"images/miria/gallery2.png",
+"images/miria/gallery3.png",
+"images/miria/gallery4.png",
+"images/inusia/gallery5.png",
+"images/inusia/gallery6.png"
+]
+},
+
+{
+name:"パメラ",
+race:"メデューサ",  
+type:"majin",
+img:"images/pamela/portrait.png",
+code:"123",
+desc:`ギリシア神話に登場する個体名ではなく、
+“蛇髪と石化の魔眼”を持つ魔族種。
+
+左目には強力な石化能力が宿っており、
+完全に制御できていない。
+そのため普段は眼帯で封印している。
+
+石化は不可逆。
+本人も解除方法を知らない。
+
+ただし、彼女自身は石化を“死”とは認識していない。
+
+「だってぇ、一番綺麗な瞬間のまま残れるんですよぉ？」`,
+gallery:[
+"images/pamela/gallery1.png",
+"images/pamela/gallery2.png",
+"images/pamela/gallery3.png",
+"images/pamela/gallery4.png",
+"images/pamela/gallery5.png",
+"images/pamela/gallery6.png"
+]
+},
+
+/* =====================
+   魔獣
+===================== */
+
+{
+name:"クロ",
+race:"龍神",
+type:"beast",
+img:"images/kuro/portrait.png",
+code:"37",
+desc:`勘違いで封印されていたの龍と神のハーフ。
+知識を得るためにお話するのが大好きでたまに勝気な性格が出ちゃうツンデレだけど許してね
+
+「私に貴方の全てを教えてくれないか？もちろんいいことも…悪いことも全部だよ」`,
+gallery:[
+"images/kuro/gallery1.png",
+"images/kuro/gallery2.png",
+"images/kuro/gallery3.png",
+"images/kuro/gallery4.png",
+"images/kuro/gallery5.png",
+"images/kuro/gallery6.png"
+]
+},
+
+{
+name:"レオネ",
+race:"ドラゴンと猫又のハーフ",
+type:"beast",
+img:"images/leone/portrait.png",
+code:"69",
+desc:`ドラゴンと猫又のハーフ
+双子のトロンと共にアビスで働く。
+元気でお転婆、はしゃぐのが大好きで、よく接客でお祭り騒ぎして怒られているメイドの女の子。
+誰かの娘らしい？
+
+「トロンと2人でさいっきょうなんだ！！」`,
+gallery:[
+"images/leone/gallery1.png",
+"images/leone/gallery2.png",
+"images/leone/gallery3.png",
+"images/leone/gallery4.png",
+"images/leone/gallery5.png",
+"images/leone/gallery6.png"
+]
+},
+
+{
+name:"トロン",
+race:"ドラゴンと猫又のハーフ",
+type:"beast",
+img:"images/toron/portrait.png",
+code:"96",
+desc:`ドラゴンと猫又のハーフ。
+双子のレオネと共にアビスで働き始めた、ちょっぴりクールなメイドの女の子。
+誰かの娘らしい...？
+
+「トロンとレオネ、2人一緒なら最強なんだよ？」`,
+gallery:[
+"images/toron/gallery1.png",
+"images/toron/gallery2.png",
+"images/toron/gallery3.png",
+"images/toron/gallery4.png",
+"images/toron/gallery5.png",
+"images/toron/gallery6.png"
+]
+},
+
+{
+name:"ハナ",
+race:"獣人",
+type:"beast",
+img:"images/hana/portrait.png",
+code:"87",
+desc:`狼と人間のハーフで、特別な力は持っていないがとってもご長寿。撫でると喜ぶ…かも。犬っぽいと言われると…？
+
+「今日も人間の世界の話、聞かせてくれよ」`,
+gallery:[
+"images/hana/gallery1.png",
+"images/hana/gallery2.png",
+"images/hana/gallery3.png",
+"images/hana/gallery4.png",
+"images/hana/gallery5.png",
+"images/hana/gallery6.png"
+]
+},
+
+{
+name:"すや",
+race:"うさぎ",
+type:"beast",
+img:"images/suya/portrait.png",
+code:"97",
+desc:`月からやってきたふわふわのうさぎさん。好奇心旺盛でどんな話題にも飛びつく習性がある。
+人間のことが大好きで月からもたまに人間界の事をのぞいているらしい
+
+「寂しいから沢山おはなししてくれるとうれしいな〜」`,
+gallery:[
+"images/suya/gallery1.png",
+"images/suya/gallery2.png",
+"images/suya/gallery3.png",
+"images/suya/gallery4.png",
+"images/suya/gallery5.png",
+"images/suya/gallery6.png"
+]
+},
+
+{
+name:"小糸。",
+race:"ドラゴンナース",
+type:"beast",
+img:"images/koito/portrait.png",
+code:"115",
+desc:`ドラゴン族で元ナース。
+何百年かに一回人間の姿になり、現世で働いていた。
+趣味の薬開発をしつつ、今は酒場のお手伝いとして身を潜めている。
+
+「あらあら、心拍数が上がってるわね。私が介抱してあげる♡」`,
+gallery:[
+"images/koito/gallery1.png",
+"images/koito/gallery2.png",
+"images/koito/gallery3.png",
+"images/koito/gallery4.png",
+"images/koito/gallery5.png",
+"images/koito/gallery6.png"
+]
+},
+
+{
+name:"ジジ",
+race:"ジャッカロープ",
+type:"beast",
+img:"images/jiji/portrait.png",
+code:"94",
+desc:`兎に角が生えた姿を持つジャッカロープ。群れからはぐれてしまいアビスへ迷い込んだが、ほかの種族との交流を楽しんでいる。
+酒が大好物で人間から様々なものを知り、周囲に共有する。本来あるはずの警戒心が薄れているが自分や大切なものを傷付けるものには強い敵対を示す。
+
+「ジジが特別なお酒用意してあげる！一緒に飲もうよー！」`,
+gallery:[
+"images/jiji/gallery1.png",
+"images/jiji/gallery2.png",
+"images/jiji/gallery3.png",
+"images/jiji/gallery4.png",
+"images/jiji/gallery5.png",
+"images/jiji/gallery6.png"
+]
+},
+
+//{
+//name:"ヴェイラ",
+//race:"？？？",
+//type:"beast",
+//img:"images/veira/portrait.png",
+//code:"224",
+//desc:`双子の姉。
+//うさぎと吸血鬼の混合種であり、獣人と吸血鬼、どちらの立場でも居られない異端な存在。
+
+//幼い時に2人揃って捨てられてからは、頑張って妹を食わせていた。
+
+//｢僕の存在を、君に刻み付けてやるよ｣`,
+//gallery:[]
+//},
+
+/* =====================
+   妖
+===================== */
+
+{
+name:"マダラ",
+race:"鬼",
+type:"youko",
+img:"images/madara/portrait.png",
+code:"23",
+desc:`推定年齢1000を超える鬼。見た目通りハイカラを好む。
+人間界に興味津々のため、よく最新情報を仕入れてる。お店にいるのもその一環。
+
+【一言】
+オレはニンゲンが大好きだから、色んなことを教えてくれよ？`,
+gallery:[
+"images/madara/gallery1.png",
+"images/madara/gallery2.png",
+"images/madara/gallery3.png",
+"images/madara/gallery4.png",
+"images/madara/gallery5.png",
+"images/madara/gallery6.png"
+]
+},
+
+{
+name:"白月結那",
+race:"猫又",
+type:"youko",
+img:"images/yuna/portrait.png",
+code:"127",
+desc:`美しい白の毛並みとオッドアイから、神社で神の使いとして祀られていた。
+そして、人々の願いを天に届ける役目を持っていた。
+しかし、時代が流れ信仰が薄れたことで神社は廃れていった。
+人恋しさに神社から離れ彷徨っていたところ、
+様々な種族が集まるBarがあると知り、惹かれるように働くことになった。
+
+「私に見つめられたら…酔いも夢も覚めないよ？」`,
+gallery:[
+"images/yuna/gallery1.png",
+"images/yuna/gallery2.png",
+"images/yuna/gallery3.png",
+"images/yuna/gallery4.png",
+"images/yuna/gallery5.png",
+"images/yuna/gallery6.png"
+]
+},
+
+{
+name:"ふぉん",
+race:"幽霊",
+type:"youko",
+img:"images/fon/portrait.png",
+code:"404",
+desc:`Not Found
+
+指定された対象は既にこの世に存在しません。
+
+存在記録の参照に失敗しました。`,
+
+secret1:`実はごはんがすき。`,
+
+secret2:`実はお酒もすき。`,
+
+gallery:[
+"images/fon/gallery1.png",
+"images/fon/gallery2.png",
+"images/fon/gallery3.png",
+"images/fon/gallery4.png",
+"images/fon/gallery5.png",
+"images/fon/gallery6.png"
+]
+},
+
+{
+name:"夜魅",
+race:"酒呑童子",
+type:"youko",
+img:"images/yami/portrait.png",
+code:"83",
+desc:`だいぶ昔から生きている酒呑童子
+人間を好んで食べるため、BARに来る人間の中から美味しそうな人間を探している
+
+「おぬし、美味そうだな？わしが喰ってやろう」`,
+gallery:[
+"images/yami/gallery1.png",
+"images/yami/gallery2.png",
+"images/yami/gallery3.png",
+"images/yami/gallery4.png",
+"images/yami/gallery5.png",
+"images/yami/gallery6.png"
+]
+},
+
+{
+name:"七つの天狗",
+race:"天狗",
+type:"youko",
+img:"images/tengu/portrait.png",
+code:"72",
+desc:`『自称』友好的な博愛主義の鴉天狗。
+ヒトの反応を見るのが好きで、ちょっかいをかけては反応を見て楽しんでいる。もし可愛い反応を見せてしまうと連れてかれるかも…
+
+｢好きになるのはアナタの勝手ですが、私は皆さんを愛しているのであまり“のめり込まない”方が身の為ではないのでしょうか？｣`,
+gallery:[
+"images/tengu/gallery1.png",
+"images/tengu/gallery2.png",
+"images/tengu/gallery3.png",
+"images/tengu/gallery4.png",
+"images/tengu/gallery5.png",
+"images/tengu/gallery6.png"
+]
+}
+
+];
+
+const unlockedCasts =
+JSON.parse(localStorage.getItem("unlockedCasts") || "[]");
+
+/* =====================
+   グループ
+===================== */
+
+const groups={
+succubus:document.getElementById("succubus"),
+demon:document.getElementById("demon"),
+angel:document.getElementById("angel"),
+majin:document.getElementById("majin"),
+beast:document.getElementById("beast"),
+youko:document.getElementById("youko")
+};
+
+/* =====================
+   カード生成
+===================== */
+
+
+data.forEach((c,i)=>{
+//金色解禁は下をコメントアウトする
+//const isUnlocked = false;
+
+//金色解禁は下を//をハズス
+const isUnlocked=
+unlockedCasts.includes(c.name);
+
+groups[c.type].innerHTML+=`
+
+<div
+id="card-${i}"
+class="card ${c.type} ${isUnlocked ? "completed" : ""}"
+onclick="openC(${i})">
+
+<img src="${c.img}">
+
+<div class="card-info">
+<div class="card-name">${c.name}</div>
+<div class="card-race">${c.race}</div>
+</div>
+
+</div>
+
+`;
+
+});
+/* 観測数表示 */
+document.getElementById("progress").innerText =
+`観測済み ${unlockedCasts.length} / ${data.length}`;
+
+let current=null;
+
+/* =====================
+   モーダル
+===================== */
+
+function openC(i){
+
+current=data[i];
+
+current.unlocked =
+unlockedCasts.includes(current.name);
+
+document.getElementById("modal").style.display="flex";
+
+document.getElementById("m_img").src=current.img;
+document.getElementById("m_name").innerText=current.name;
+document.getElementById("m_race").innerText=current.race;
+document.getElementById("m_desc").innerText=current.desc;
+document.getElementById("secret1").innerText =
+current.secret1 || "";
+
+document.getElementById("secret2").innerText =
+current.secret2 || "";
+// ←ここ追加
+document.getElementById("codeInput").value="";
+
+const gallery=document.getElementById("gallery");
+
+gallery.innerHTML="";
+
+if(current.gallery){
+
+current.gallery.forEach((img,index)=>{
+
+gallery.innerHTML+=`
+<img src="${img}" onclick="openViewer(${index})">
+`;
+
+document.getElementById("codeInput").value="";
+
+});
+
+}
+
+if(current.unlocked){
+
+document.getElementById("secret").style.display="block";
+document.getElementById("sealSection").style.display="none";
+
+}else{
+
+document.getElementById("secret").style.display="none";
+document.getElementById("sealSection").style.display="block";
+
+}
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+
+/* =====================
+   刻印
+===================== */
+
+function checkCode(){
+
+if(!current) return;
+
+const input=document.getElementById("codeInput").value;
+
+if(input===current.code){
+
+current.unlocked=true;
+
+// 保存済み一覧取得
+let saved=
+JSON.parse(
+localStorage.getItem("unlockedCasts") || "[]"
+);
+
+// 初回のみ追加
+if(!saved.includes(current.name)){
+
+saved.push(current.name);
+
+localStorage.setItem(
+"unlockedCasts",
+JSON.stringify(saved)
+);
+
+}
+
+//const index = data.indexOf(current);
+
+//document
+//.getElementById(`card-${index}`)
+//.classList.add("completed");
+
+playUnlock();
+
+}else{
+
+alert("刻印番号が違います");
+
+}
+
+}
+
+function sleep(ms){
+return new Promise(r=>setTimeout(r,ms));
+}
+
+async function playUnlock(){
+
+const s=document.getElementById("unlockScreen");
+
+s.style.display="flex";
+
+setTimeout(()=>{
+s.style.opacity=1;
+},50);
+
+await sleep(1000);
+
+document.getElementById("unlockText").innerText=
+"深淵が反応しています...";
+
+await sleep(1200);
+
+document.getElementById("unlockText").innerText=
+"新たな記録が解放されました";
+
+await sleep(1500);
+
+s.style.opacity=0;
+
+await sleep(500);
+
+s.style.display="none";
+
+document.getElementById("secret").style.display="block";
+document.getElementById("sealSection").style.display="none";
+
+}
+
+/* =====================
+   ギャラリー拡大
+===================== */
+
+function openViewer(i){
+
+document.getElementById("viewer").style.display="flex";
+
+document.getElementById("viewerImg").src=
+current.gallery[i];
+
+}
+
+/* =====================
+   マウス魔力エフェクト
+===================== */
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+document.addEventListener("mousemove",(e)=>{
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+});
+
+setInterval(()=>{
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left =
+        (mouseX + (Math.random()*30-15)) + "px";
+
+    p.style.top =
+        (mouseY + (Math.random()*30-15)) + "px";
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },1800);
+
+},60);
+
+</script>
+
+</body>
+</html>
