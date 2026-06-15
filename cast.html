@@ -312,6 +312,13 @@ object-fit:cover;
 padding:35px;
 flex:1;
 overflow-y:auto;
+
+scrollbar-width:none;
+-ms-overflow-style:none;
+}
+
+.modal-right::-webkit-scrollbar{
+display:none;
 }
 
 .modal-name{
@@ -389,7 +396,7 @@ padding-top:80px;
 
 background:rgba(0,0,0,.96);
 
-transition:.3s;
+transition:.8s;
 
 z-index:99999;
 }
@@ -613,6 +620,28 @@ align-items:center;
 opacity:0;
 transition:.5s;
 z-index:999999;
+}
+
+#flash{
+
+position:fixed;
+inset:0;
+
+background:
+radial-gradient(
+circle,
+rgba(255,255,255,1) 0%,
+rgba(220,220,255,0.95) 35%,
+rgba(176,76,255,0.85) 70%,
+rgba(176,76,255,0.2) 100%
+);
+
+opacity:0;
+pointer-events:none;
+
+z-index:9999999;
+
+transition:opacity 2s ease;
 }
 
 #unlockText{
@@ -1658,7 +1687,7 @@ document.body.style.overflow="";
    刻印
 ===================== */
 
-function checkCode(){
+async function checkCode(){
 
 if(!current) return;
 
@@ -1684,6 +1713,9 @@ localStorage.setItem(
 JSON.stringify(saved)
 );
 
+document.getElementById("progress").innerText =
+`観測済み ${saved.length} / ${data.length}`;
+
 }
 
 const index = data.indexOf(current);
@@ -1692,7 +1724,7 @@ document
 .getElementById(`card-${index}`)
 .classList.add("completed");
 
-playUnlock();
+await playUnlock();
 
 }else{
 
@@ -1711,6 +1743,7 @@ async function playUnlock(){
 const s=document.getElementById("unlockScreen");
 
 s.style.display="flex";
+document.getElementById("unlockText").style.opacity = 1;
 
 setTimeout(()=>{
 s.style.opacity=1;
@@ -1728,14 +1761,43 @@ document.getElementById("unlockText").innerText=
 
 await sleep(1500);
 
-s.style.opacity=0;
+/* テキストを消す */
+document.getElementById("unlockText").style.opacity = 0;
 
-await sleep(500);
+await sleep(300);
 
-s.style.display="none";
+const flash=document.getElementById("flash");
+
+/* ゆっくり明るく */
+
+flash.style.transition =
+"opacity 1.8s ease";
+
+flash.style.opacity = 1;
+
+await sleep(1800);
+
+/* 光の中で少し停止 */
+
+await sleep(700);
+
+/* 情報解放 */
 
 document.getElementById("secret").style.display="block";
 document.getElementById("sealSection").style.display="none";
+
+/* 光がゆっくり消える */
+
+flash.style.opacity = 0;
+
+await sleep(2000);
+
+/* 黒画面を閉じる */
+s.style.opacity = 0;
+
+await sleep(500);
+
+s.style.display = "none";
 
 }
 
@@ -1807,6 +1869,6 @@ menuBtn.addEventListener("click",()=>{
 });
 
 </script>
-
+<div id="flash"></div>
 </body>
 </html>
