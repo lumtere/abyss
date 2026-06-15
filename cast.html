@@ -366,21 +366,24 @@ box-shadow:
 
 @media (max-width:768px){
 
+body{
+margin-left:0;
+}
+
+/* ハンバーガー */
+
 #menuBtn{
 display:block;
-position:fixed;
-top:15px;
-left:15px;
-
-z-index:999999;
+z-index:100000;
 }
+
+/* サイドバー */
 
 #sidebar{
 
 width:180px;
-left:-180px;
 
-padding-top:80px; /* ←追加 */
+left:-180px;
 
 background:rgba(0,0,0,.96);
 
@@ -392,25 +395,79 @@ z-index:99999;
 #sidebar.open{
 left:0;
 }
+
+/* タイトル位置 */
+
+.title{
+padding-top:80px;
+text-align:center;
+font-size:32px;
+}
+
+/* カード余白 */
+
+.grid{
+padding:10px;
+}
+
+/* 顔が切れないように */
+
+.card img{
+object-position:top;
+}
+
+/* モーダルをスマホ用に */
+
 .modal-content{
-width:95%;
-height:90%;
+
+width:95vw;
+height:90vh;
+
 flex-direction:column;
 }
+
+/* 上画像 */
 
 .modal-left{
 width:100%;
 height:40%;
 }
 
+.modal-left img{
+object-position:top;
+}
+
+/* 下テキスト */
+
 .modal-right{
-width:100%;
 padding:15px;
 }
 
+/* 名前サイズ */
+
 .modal-name{
-font-size:28px;
+font-size:30px;
 }
+
+/* 閉じるボタン */
+
+.close{
+
+font-size:50px;
+
+right:10px;
+top:10px;
+
+width:60px;
+height:60px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:100000;
+}
+
 }
 /* ==========================
    入力欄
@@ -1528,6 +1585,8 @@ unlockedCasts.includes(current.name);
 
 document.getElementById("modal").style.display="flex";
 
+document.body.style.overflow="hidden";
+
 document.getElementById("m_img").src=current.img;
 document.getElementById("m_name").innerText=current.name;
 document.getElementById("m_race").innerText=current.race;
@@ -1575,6 +1634,8 @@ document.getElementById("sealSection").style.display="block";
 function closeModal(){
 
 document.getElementById("modal").style.display="none";
+
+document.body.style.overflow="";
 
 }
 
