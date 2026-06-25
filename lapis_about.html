@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>異世界アビス - 参加方法</title>
+<title>異世界ラピス - 世界観</title>
 
 <style>
 #menuBtn{
@@ -21,12 +21,12 @@ border:none;
 border-radius:10px;
 
 background:rgba(0,0,0,.8);
-color:#b04cff;
+color:#6fdcff;
 
 font-size:28px;
 cursor:pointer;
 
-box-shadow:0 0 10px rgba(176,76,255,.5);
+box-shadow:0 0 10px rgba(111,220,255,.5);
 }
 
 #sidebar{
@@ -38,7 +38,7 @@ width:220px;
 height:100vh;
 
 background:rgba(0,0,0,.85);
-border-right:1px solid #b04cff;
+border-right:1px solid #6fdcff;
 
 padding-top:40px;
 
@@ -62,27 +62,44 @@ transition:.2s;
 }
 
 #sidebar a:hover{
-background:rgba(176,76,255,.15);
+background:rgba(111,220,255,.15);
 color:#fff;
-text-shadow:0 0 10px #b04cff;
+text-shadow:0 0 10px #6fdcff;
 }
 
 #sidebar a.active{
 
-background:rgba(176,76,255,.18);
+background:rgba(111,220,255,.12);
 
 color:#fff;
 
 font-weight:bold;
 
-border-left:4px solid #b04cff;
+border-left:4px solid #6fdcff;
 
 box-shadow:
-inset 0 0 15px rgba(176,76,255,.25);
+inset 0 0 15px rgba(111,220,255,.2);
 
 text-shadow:
-0 0 10px #b04cff,
-0 0 20px #b04cff;
+0 0 10px #6fdcff,
+0 0 20px #6fdcff;
+
+}
+
+.corrupted{
+
+font-family:monospace;
+
+color:#777;
+
+letter-spacing:2px;
+
+opacity:.65;
+
+user-select:none;
+
+text-shadow:
+0 0 5px rgba(255,255,255,.15);
 
 }
 /* ==========================
@@ -97,11 +114,17 @@ font-family:"Yu Gothic",sans-serif;
 }
 
 body{
-background:#080810;
+background:
+linear-gradient(
+180deg,
+#081a2d 0%,
+#12365c 50%,
+#1f5a87 100%
+);
+
 color:white;
 min-height:100vh;
 overflow-x:hidden;
-
 margin-left:220px;
 }
 
@@ -128,17 +151,9 @@ animation:rotateCircle 120s linear infinite;
 }
 
 #content{
-position:relative;
-z-index:1;
-}
-
-@keyframes rotateCircle{
-from{
-transform:translate(-50%,-50%) rotate(0deg);
-}
-to{
-transform:translate(-50%,-50%) rotate(360deg);
-}
+max-width:900px;
+margin:0 auto;
+padding:20px;
 }
 
 /* ==========================
@@ -190,7 +205,7 @@ border-color:#ff9d2e;
 }
 
 .youko{
-border-color:#b04cff;
+border-color:#6fdcff;
 }
 
 /* ==========================
@@ -276,7 +291,7 @@ border-color:#ff9d2e;
 }
 
 .card.youko{
-border-color:#b04cff;
+border-color:#6fdcff;
 }
 
 /* ==========================
@@ -286,7 +301,7 @@ border-color:#b04cff;
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.85);
+background:rgba(8,26,45,.88);
 display:none;
 justify-content:center;
 align-items:center;
@@ -354,11 +369,11 @@ user-select:none;
 margin-top:20px;
 padding:20px;
 background:rgba(0,0,0,.4);
-border:1px solid #b04cff;
+border:1px solid #6fdcff;
 border-radius:12px;
 box-shadow:
-0 0 10px rgba(176,76,255,.3),
-inset 0 0 10px rgba(176,76,255,.15);
+0 0 10px rgba(111,220,255,.3),
+inset 0 0 10px rgba(111,220,255,.15);
 }
 
 .seal-title{
@@ -378,7 +393,7 @@ margin-bottom:15px;
 width:300px;
 padding:12px;
 background:#111;
-border:1px solid #b04cff;
+border:1px solid #6fdcff;
 border-radius:8px;
 color:white;
 font-size:16px;
@@ -386,7 +401,7 @@ outline:none;
 }
 
 .code-input:focus{
-box-shadow:0 0 15px rgba(176,76,255,.6);
+box-shadow:0 0 15px rgba(111,220,255,.6);
 }
 
 .unlock-btn{
@@ -395,7 +410,7 @@ margin-left:10px;
 background:linear-gradient(
 45deg,
 #6b2fb8,
-#b04cff
+#6fdcff
 );
 border:none;
 border-radius:8px;
@@ -407,13 +422,13 @@ transition:.2s;
 
 .unlock-btn:hover{
 transform:translateY(-2px);
-box-shadow:0 0 15px rgba(176,76,255,.6);
+box-shadow:0 0 15px rgba(111,220,255,.6);
 }
 
 .unlock-btn{
 padding:10px 18px;
 border:none;
-background:#b04cff;
+background:#6fdcff;
 color:white;
 cursor:pointer;
 border-radius:8px;
@@ -482,10 +497,10 @@ z-index:999999;
 
 #unlockText{
 font-size:40px;
-color:#b04cff;
+color:#6fdcff;
 text-shadow:
-0 0 10px #b04cff,
-0 0 20px #b04cff;
+0 0 10px #6fdcff,
+0 0 20px #6fdcff;
 }
 
 .particle{
@@ -498,9 +513,9 @@ z-index:9999;
 
 background:radial-gradient(
 circle,
-rgba(255,255,255,0.9) 0%,
-rgba(176,76,255,0.8) 40%,
-rgba(111,220,255,0.3) 100%
+rgba(255,255,255,1) 0%,
+rgba(255,255,255,0.8) 40%,
+rgba(255,255,255,0.1) 100%
 );
 
 filter:blur(1px);
@@ -535,7 +550,7 @@ padding:20px;
 
 background:rgba(0,0,0,.45);
 
-border:1px solid rgba(176,76,255,.4);
+border:1px solid rgba(111,220,255,.4);
 
 border-radius:15px;
 
@@ -546,18 +561,18 @@ margin-bottom:25px;
 backdrop-filter:blur(5px);
 
 box-shadow:
-0 0 15px rgba(176,76,255,.15);
+0 0 15px rgba(111,220,255,.15);
 
 }
 
 .event-box h2{
 
-color:#b04cff;
+color:#6fdcff;
 
 margin-bottom:15px;
 
 text-shadow:
-0 0 10px #b04cff;
+0 0 10px #6fdcff;
 
 }
 
@@ -593,13 +608,13 @@ border:none;
 border-radius:10px;
 
 background:rgba(0,0,0,.8);
-color:#b04cff;
+color:#6fdcff;
 
 font-size:28px;
 cursor:pointer;
 
 box-shadow:
-0 0 10px rgba(176,76,255,.5);
+0 0 10px rgba(111,220,255,.5);
 }
 
 /* スマホ */
@@ -623,7 +638,7 @@ width:220px;
 height:100vh;
 
 background:rgba(0,0,0,.85);
-border-right:1px solid #b04cff;
+border-right:1px solid #6fdcff;
 
 padding-top:40px;
 
@@ -663,92 +678,130 @@ padding:18px;
 
 <a href="index.html">TOP</a>
 
-<a href="about.html">アビスについて</a>
+<a href="lapis_about.html" class="active">ラピスについて</a>
 
-<a href="join.html" class="active">参加方法</a>
+<a href="lapis_join.html">参加方法</a>
 
-<a href="cast.html">
+<a href="lapis_cast.html">
 キャスト一覧
 </a>
 
-<a href="contact.html">連絡</a>
+<a href="lapis_contact.html">連絡</a>
 
 </nav>
 
 <div id="content">
 
 <h1 class="title">
-イベント参加方法
+ラピスについて
 </h1>
 
 <div class="event-box">
 
-<h2>異世界-アビス- とは</h2>
+<h2>ホスト『ラピス』</h2>
 
 <p>
-異世界-アビス-はVRChat内で開催される
-魔界・異世界コンセプトの交流イベントです。
+『ラピス』は、様々な異世界の住人たちが集うホストクラブです。
 </p>
 
 <p>
-悪魔やサキュバス、獣人、天使など、
-深淵の住人達との交流をお楽しみください。
+天使、悪魔、獣人。
+</p>
+
+<p>
+本来であれば出会うことのなかった種族たちが、
+この場所では同じ席を囲み、語り合っています。
+</p>
+
+<p>
+出身世界や立場を問わず、
+誰もが自由に交流できる中立地帯。
+</p>
+
+<p>
+それがホスト『ラピス』です。
 </p>
 
 </div>
 
 <div class="event-box">
 
-<h2>開催日時</h2>
+<h2>四つの世界</h2>
 
 <p>
-毎週水曜日 21:00 ～ 22:00
+現在確認されている世界は四つ存在します。
 </p>
-
-</div>
-
-<div class="event-box">
-
-<h2>参加条件</h2>
 
 <ul>
-<li>PC Desktop または PCVR</li>
-<li>軽量アバターの利用にご協力ください</li>
-<li>Quest単機では参加できません</li>
+<li>ルミナス ─ 天使とドラゴンの世界</li>
+<li>ネザリア ─ 悪魔とサキュバスの世界</li>
+<li>幽世 ─ 妖と精霊が住まう境界の世界</li>
+<li>ノクス・レガリア ─ ヴァンパイアが統べる夜の世界</li>
 </ul>
+
+<p>
+価値観も文化も異なる世界ですが、
+現在は境界が安定しており交流が行われています。
+</p>
 
 </div>
 
 <div class="event-box">
 
-<h2>参加方法</h2>
+<h2>ラピスの名</h2>
 
-<ol>
-<li>
-<a href="https://x.com/isekai_abyss"
-target="_blank">
+<p>
+このホストの名前は、
+遥か昔に存在したとされる『ラピス』に由来しています。
+</p>
 
-公式X
+<p>
+その詳細を知る者はほとんど残っておらず、
+現在では古い伝承として語られるのみです。
+</p>
 
-</a>
-で当日のインスタンスリーダーを確認
-</li>
-<li>リーダーへフレンド申請</li>
-<li>21:00になったらリクエストインバイトを送信</li>
-<li>案内されたインスタンスへ参加</li>
-</ol>
+<p class="corrupted">
+ARCHIVE : LAPIS-000
+</p>
+
+<p class="corrupted">
+STATUS : DATA CORRUPTED
+</p>
+
+<p class="corrupted">
+縺薙％縺ｮ荳也阜縺ｯ螟ｱ繧上ｌ縺溘
+</p>
+
+<p class="corrupted">
+繧｢繝薙せ縺ｮ豕ｨ諢上ｒ遒ｺ隱阪☆
+</p>
+
+<p class="corrupted">
+ERROR...
+</p>
 
 </div>
 
 <div class="event-box">
 
-<h2>注意事項</h2>
+<h2>来訪者へ</h2>
 
-<ul>
-<li>リクエストインバイトは『1回』まで　※複数インスタンスへの同時送信は禁止です</li>
-<li>他参加者への迷惑行為はおやめください</li>
-<li>スタッフの案内には必ず従ってください</li>
-</ul>
+<p>
+ホスト『ラピス』には、
+様々な種族と物語が集まります。
+</p>
+
+<p>
+新たな出会いも、
+忘れられた過去の欠片も、
+この場所には眠っているかもしれません。
+</p>
+
+<p>
+どうぞ輝きに満ちた一夜をお楽しみください。
+</p>
+
+</div>
 
 </div>
 
