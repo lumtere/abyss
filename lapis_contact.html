@@ -597,53 +597,27 @@ padding-left:25px;
    スマホ用メニュー
 ========================== */
 
-#menuBtn{
-display:none;
-position:fixed;
-top:15px;
-left:15px;
-z-index:2000;
 
-width:50px;
-height:50px;
-
-border:none;
-border-radius:10px;
-
-background:rgba(0,0,0,.8);
-color:#b04cff;
-
-font-size:28px;
-cursor:pointer;
-
-box-shadow:
-0 0 10px rgba(176,76,255,.5);
-}
 
 /* スマホ */
 
 @media (max-width:768px){
 
 body{
-margin-left:0;
+    margin-left:0;
 }
 
 #menuBtn{
-display:block;
+    display:block;
+    z-index:100000;
 }
 
 #sidebar{
-
     width:180px;
-
     left:-180px;
-
     padding-top:80px;
-
-    background:rgba(0,0,0,96);
-
+    background:rgba(0,0,0,.96);  /* ←ここは .96 にするのがおすすめ */
     transition:.8s;
-
     z-index:99999;
 }
 

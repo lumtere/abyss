@@ -622,25 +622,20 @@ box-shadow:
 @media (max-width:768px){
 
 body{
-margin-left:0;
+    margin-left:0;
 }
 
 #menuBtn{
-display:block;
+    display:block;
+    z-index:100000;   /* ←追加されている */
 }
 
 #sidebar{
-
     width:180px;
-
     left:-180px;
-
     padding-top:80px;
-
-    background:rgba(0,0,0,96);
-
+    background:rgba(0,0,0,.96);  /* ←ここは .96 にするのがおすすめ */
     transition:.8s;
-
     z-index:99999;
 }
 
