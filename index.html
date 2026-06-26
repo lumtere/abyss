@@ -361,14 +361,42 @@ transform:translateX(40px);
 @media(max-width:768px){
 
 .name{
-
 font-size:52px;
 letter-spacing:8px;
 }
 
 .portal:hover .name{
-
 letter-spacing:12px;
+}
+
+/* iPhone・Android共通でズレにくい */
+
+.lapis-bg{
+top:0;
+bottom:52%;
+height:auto;
+}
+
+.abyss-bg{
+top:48%;
+bottom:0;
+height:auto;
+}
+
+.lapis{
+top:0;
+bottom:52%;
+height:auto;
+}
+
+.abyss{
+top:48%;
+bottom:0;
+height:auto;
+}
+
+.boundary{
+top:48%;
 }
 
 }
